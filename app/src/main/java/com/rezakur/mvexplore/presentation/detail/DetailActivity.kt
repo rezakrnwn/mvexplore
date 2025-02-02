@@ -10,10 +10,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.rezakur.mvexplore.BuildConfig
 import com.rezakur.mvexplore.R
-import com.rezakur.mvexplore.core.base.BaseView
-import com.rezakur.mvexplore.core.constant.CatalogType
-import com.rezakur.mvexplore.core.ui.ProductionCompanyAdapter
-import com.rezakur.mvexplore.core.ui.SeasonAdapter
+import com.rezakur.core.base.BaseView
+import com.rezakur.core.constant.CatalogType
+import com.rezakur.core.ui.ProductionCompanyAdapter
+import com.rezakur.core.ui.SeasonAdapter
 import com.rezakur.mvexplore.databinding.ActivityDetailBinding
 import com.rezakur.mvexplore.presentation.detail.viewmodels.DetailIntent
 import com.rezakur.mvexplore.presentation.detail.viewmodels.DetailState
@@ -21,7 +21,6 @@ import com.rezakur.mvexplore.presentation.detail.viewmodels.DetailStatus
 import com.rezakur.mvexplore.presentation.detail.viewmodels.DetailViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.ScopeActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat

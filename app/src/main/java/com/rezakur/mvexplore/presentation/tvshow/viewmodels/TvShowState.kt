@@ -1,7 +1,7 @@
 package com.rezakur.mvexplore.presentation.tvshow.viewmodels
 
-import com.rezakur.mvexplore.core.base.BaseViewState
-import com.rezakur.mvexplore.domain.models.Catalog
+import com.rezakur.core.base.BaseViewState
+import com.rezakur.core.domain.models.Catalog
 
 data class TvShowState(
     val status: TvShowStatus = TvShowStatus.INITIAL,

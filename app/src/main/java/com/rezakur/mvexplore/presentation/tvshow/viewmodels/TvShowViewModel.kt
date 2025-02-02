@@ -2,10 +2,10 @@ package com.rezakur.mvexplore.presentation.tvshow.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rezakur.mvexplore.core.base.BaseViewModel
-import com.rezakur.mvexplore.core.network.Resource
-import com.rezakur.mvexplore.domain.usecases.GetAiringTodayTvShow
-import com.rezakur.mvexplore.domain.usecases.GetAiringTodayTvShowParams
+import com.rezakur.core.base.BaseViewModel
+import com.rezakur.core.network.Resource
+import com.rezakur.core.domain.usecases.GetAiringTodayTvShow
+import com.rezakur.core.domain.usecases.GetAiringTodayTvShowParams
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest

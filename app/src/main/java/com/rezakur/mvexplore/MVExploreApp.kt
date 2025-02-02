@@ -1,10 +1,10 @@
 package com.rezakur.mvexplore
 
 import android.app.Application
-import com.rezakur.mvexplore.di.databaseModule
-import com.rezakur.mvexplore.di.networkModule
-import com.rezakur.mvexplore.di.repositoryModule
-import com.rezakur.mvexplore.di.useCaseModule
+import com.rezakur.core.di.databaseModule
+import com.rezakur.core.di.networkModule
+import com.rezakur.core.di.repositoryModule
+import com.rezakur.core.di.useCaseModule
 import com.rezakur.mvexplore.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

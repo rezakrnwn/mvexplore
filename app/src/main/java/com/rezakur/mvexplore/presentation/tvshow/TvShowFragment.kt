@@ -10,12 +10,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.rezakur.core.base.BaseView
+import com.rezakur.core.constant.CatalogType
+import com.rezakur.core.domain.models.Catalog
+import com.rezakur.core.ui.CatalogAdapter
 import com.rezakur.mvexplore.BuildConfig
-import com.rezakur.mvexplore.core.base.BaseView
-import com.rezakur.mvexplore.core.constant.CatalogType
-import com.rezakur.mvexplore.core.ui.CatalogAdapter
 import com.rezakur.mvexplore.databinding.FragmentTvShowBinding
-import com.rezakur.mvexplore.domain.models.Catalog
 import com.rezakur.mvexplore.presentation.detail.DetailActivity
 import com.rezakur.mvexplore.presentation.tvshow.viewmodels.TvShowIntent
 import com.rezakur.mvexplore.presentation.tvshow.viewmodels.TvShowState

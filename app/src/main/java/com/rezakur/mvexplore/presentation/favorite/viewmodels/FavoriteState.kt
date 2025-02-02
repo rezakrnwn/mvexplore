@@ -1,7 +1,7 @@
 package com.rezakur.mvexplore.presentation.favorite.viewmodels
 
-import com.rezakur.mvexplore.core.base.BaseViewState
-import com.rezakur.mvexplore.domain.models.Favorite
+import com.rezakur.core.base.BaseViewState
+import com.rezakur.core.domain.models.Favorite
 
 enum class FavoriteStatus {
     INITIAL, LOADING, LOADED

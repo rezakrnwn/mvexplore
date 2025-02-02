@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MVExplore"
 include(":app")
- 
+include(":core")

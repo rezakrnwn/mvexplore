@@ -1,8 +1,8 @@
 package com.rezakur.mvexplore.presentation.detail.viewmodels
 
-import com.rezakur.mvexplore.core.base.BaseViewState
-import com.rezakur.mvexplore.core.network.Resource
-import com.rezakur.mvexplore.domain.models.CatalogDetail
+import com.rezakur.core.base.BaseViewState
+import com.rezakur.core.network.Resource
+import com.rezakur.core.domain.models.CatalogDetail
 
 data class DetailState(
     val status: DetailStatus,
@@ -11,12 +11,12 @@ data class DetailState(
 ) : BaseViewState {
     companion object {
         fun initial(): DetailState = DetailState(
-            status = DetailStatus.LOADING,
+            status = DetailStatus.INITIAL,
             isFavorite = false,
         )
     }
 }
 
 enum class DetailStatus {
-    INITIAL, LOADING, LOADED, SUCCESS, ERROR
+    INITIAL, LOADING, LOADED, ERROR
 }

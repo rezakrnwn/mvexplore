@@ -2,10 +2,10 @@ package com.rezakur.mvexplore.presentation.movie.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rezakur.mvexplore.core.base.BaseViewModel
-import com.rezakur.mvexplore.core.network.Resource
-import com.rezakur.mvexplore.domain.usecases.GetNowPlayingMovies
-import com.rezakur.mvexplore.domain.usecases.GetNowPlayingMoviesParams
+import com.rezakur.core.base.BaseViewModel
+import com.rezakur.core.network.Resource
+import com.rezakur.core.domain.usecases.GetNowPlayingMovies
+import com.rezakur.core.domain.usecases.GetNowPlayingMoviesParams
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest

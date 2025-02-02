@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rezakur.mvexplore.R
-import com.rezakur.mvexplore.core.base.BaseView
-import com.rezakur.mvexplore.core.ui.FavoriteAdapter
+import com.rezakur.core.base.BaseView
+import com.rezakur.core.ui.FavoriteAdapter
 import com.rezakur.mvexplore.databinding.ActivityFavoriteBinding
 import com.rezakur.mvexplore.presentation.detail.DetailActivity
 import com.rezakur.mvexplore.presentation.favorite.viewmodels.FavoriteIntent
