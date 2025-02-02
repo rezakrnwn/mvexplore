@@ -1,4 +1,4 @@
-package com.rezakur.mvexplore.presentation.favorite.viewmodels
+package com.rezakur.mvexplore.favorite.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

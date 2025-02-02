@@ -1,4 +1,4 @@
-package com.rezakur.mvexplore.presentation.favorite.viewmodels
+package com.rezakur.mvexplore.favorite.viewmodels
 
 import com.rezakur.core.base.BaseViewState
 import com.rezakur.core.domain.models.Favorite

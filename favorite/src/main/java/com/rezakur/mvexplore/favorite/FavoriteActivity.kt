@@ -1,4 +1,4 @@
-package com.rezakur.mvexplore.presentation.favorite
+package com.rezakur.mvexplore.favorite
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,18 +7,24 @@ import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rezakur.mvexplore.R
 import com.rezakur.core.base.BaseView
+import com.rezakur.core.di.databaseModule
+import com.rezakur.core.di.networkModule
+import com.rezakur.core.di.repositoryModule
+import com.rezakur.core.di.useCaseModule
 import com.rezakur.core.ui.FavoriteAdapter
-import com.rezakur.mvexplore.databinding.ActivityFavoriteBinding
+import com.rezakur.mvexplore.R
+import com.rezakur.mvexplore.favorite.databinding.ActivityFavoriteBinding
+import com.rezakur.mvexplore.favorite.di.viewModelModule
 import com.rezakur.mvexplore.presentation.detail.DetailActivity
-import com.rezakur.mvexplore.presentation.favorite.viewmodels.FavoriteIntent
-import com.rezakur.mvexplore.presentation.favorite.viewmodels.FavoriteState
-import com.rezakur.mvexplore.presentation.favorite.viewmodels.FavoriteStatus
-import com.rezakur.mvexplore.presentation.favorite.viewmodels.FavoriteViewModel
+import com.rezakur.mvexplore.favorite.viewmodels.FavoriteIntent
+import com.rezakur.mvexplore.favorite.viewmodels.FavoriteState
+import com.rezakur.mvexplore.favorite.viewmodels.FavoriteStatus
+import com.rezakur.mvexplore.favorite.viewmodels.FavoriteViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 class FavoriteActivity : AppCompatActivity(), BaseView<FavoriteState> {
     private lateinit var binding: ActivityFavoriteBinding
@@ -29,6 +35,7 @@ class FavoriteActivity : AppCompatActivity(), BaseView<FavoriteState> {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        loadKoinModules(viewModelModule)
         setToolbar()
         setRecyclerView()
         observeState()
@@ -71,6 +78,11 @@ class FavoriteActivity : AppCompatActivity(), BaseView<FavoriteState> {
             else -> {
                 binding.progressBar.visibility = GONE
                 favoriteAdapter.setData(state.favorites)
+                state.favorites.takeIf { it.isEmpty() }?.let {
+                    binding.favoriteEmptyText.visibility = VISIBLE
+                } ?: run {
+                    binding.favoriteEmptyText.visibility = GONE
+                }
             }
         }
     }

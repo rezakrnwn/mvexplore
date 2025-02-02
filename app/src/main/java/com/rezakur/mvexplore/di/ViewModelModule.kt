@@ -1,7 +1,6 @@
 package com.rezakur.mvexplore.di
 
 import com.rezakur.mvexplore.presentation.detail.viewmodels.DetailViewModel
-import com.rezakur.mvexplore.presentation.favorite.viewmodels.FavoriteViewModel
 import com.rezakur.mvexplore.presentation.movie.viewmodels.MovieViewModel
 import com.rezakur.mvexplore.presentation.tvshow.viewmodels.TvShowViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -25,11 +24,6 @@ val viewModelModule = module {
             getFavoriteById = get(),
             addFavorite = get(),
             deleteFavorite = get(),
-        )
-    }
-    viewModel {
-        FavoriteViewModel(
-            getFavorites = get(),
         )
     }
 }

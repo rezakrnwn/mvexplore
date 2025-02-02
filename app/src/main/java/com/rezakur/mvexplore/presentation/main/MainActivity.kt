@@ -1,13 +1,13 @@
 package com.rezakur.mvexplore.presentation.main
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rezakur.mvexplore.R
 import com.rezakur.mvexplore.databinding.ActivityMainBinding
-import com.rezakur.mvexplore.presentation.favorite.FavoriteActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
             it.toolbar.setOnMenuItemClickListener { menu ->
                 when (menu.itemId) {
                     R.id.action_favorite -> {
-                        startActivity(Intent(this, FavoriteActivity::class.java))
+                        val uri = Uri.parse("mvexplore://favorite")
+                        startActivity(Intent(Intent.ACTION_VIEW, uri))
                         return@setOnMenuItemClickListener true
                     }
                     else -> {
