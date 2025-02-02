@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_catalog_layout"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:padding="8dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="false"
+        app:strokeWidth="1dp">
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/avatars" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/card_view"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:maxLines="2"
+            android:textStyle="bold"
+            tools:text="Transformers: Rise of the Beasts" />
+
+        <RatingBar
+            android:id="@+id/rating_bar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_title"
+            android:layout_gravity="start"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.1"
+            tools:rating="1" />
+
+        <TextView
+            android:id="@+id/text_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_title"
+            android:layout_toEndOf="@+id/rating_bar"
+            android:textSize="12sp"
+            tools:text="7.2" />
+
+        <TextView
+            android:id="@+id/text_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rating_bar"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@android:color/darker_gray"
+            tools:text="When a new threat capable of destroying the entire planet emerges, Optimus Prime and the Autobots must team up with a powerful" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
