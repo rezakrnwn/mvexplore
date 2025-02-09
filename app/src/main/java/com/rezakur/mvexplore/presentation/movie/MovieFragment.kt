@@ -10,9 +10,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rezakur.mvexplore.BuildConfig
+import com.rezakur.core.BuildConfig
 import com.rezakur.core.base.BaseView
 import com.rezakur.core.constant.CatalogType
+import com.rezakur.core.constant.IntentConstants
 import com.rezakur.core.ui.CatalogAdapter
 import com.rezakur.mvexplore.databinding.FragmentMovieBinding
 import com.rezakur.core.domain.models.Catalog
@@ -82,8 +83,8 @@ class MovieFragment : ScopeFragment(), BaseView<MovieState> {
 
         catalogAdapter.setOnItemClickListener { catalog: Catalog ->
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("catalog_id", catalog.id)
-            intent.putExtra("catalog_type_id", CatalogType.MOVIE.id)
+            intent.putExtra(IntentConstants.CATALOG_ID, catalog.id)
+            intent.putExtra(IntentConstants.CATALOG_TYPE_ID, CatalogType.MOVIE.id)
             startActivity(intent)
         }
     }

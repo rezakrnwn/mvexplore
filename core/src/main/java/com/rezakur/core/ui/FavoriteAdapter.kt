@@ -1,16 +1,16 @@
 package com.rezakur.core.ui
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.rezakur.core.R
+import com.rezakur.core.base.BaseDiffCallback
 import com.rezakur.core.databinding.ItemCatalogBinding
 import com.rezakur.core.domain.models.Favorite
+import com.rezakur.core.extensions.loadImage
 import java.util.Locale
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.MainViewHolder>() {
@@ -33,27 +33,32 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.MainViewHolder>() {
                         .toFloat() / 10) * 5
                 textRating.text =
                     String.format(Locale.US,"%.1f", favorite.voteAverage.toFloat())
-
-                Glide.with(itemView.context)
-                    .load("https://image.tmdb.org/t/p/w500${favorite.imagePath}")
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .placeholder(
-                        ContextCompat.getDrawable(
-                            itemView.context,
-                            R.drawable.baseline_local_movies_24
-                        )
+                imageView.loadImage(
+                    "https://image.tmdb.org/t/p/w500${favorite.imagePath}",
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.baseline_local_movies_24
                     )
-                    .into(imageView)
+                )
             }
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<Favorite>?) {
         if (newList == null) return
+
+        val diffCallback = BaseDiffCallback(
+            oldList = favorites,
+            newList = newList,
+            areItemsSame = { old, new -> old.id == new.id },
+            areContentsSame = { old, new -> old == new }
+        )
+
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         favorites.clear()
         favorites.addAll(newList)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     fun setOnItemClickListener(listener: (Favorite) -> Unit) {

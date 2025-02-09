@@ -6,12 +6,12 @@ import android.view.View.VISIBLE
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.rezakur.mvexplore.BuildConfig
+import com.rezakur.core.BuildConfig
 import com.rezakur.mvexplore.R
 import com.rezakur.core.base.BaseView
 import com.rezakur.core.constant.CatalogType
+import com.rezakur.core.constant.IntentConstants
+import com.rezakur.core.extensions.loadImage
 import com.rezakur.core.ui.ProductionCompanyAdapter
 import com.rezakur.core.ui.SeasonAdapter
 import com.rezakur.mvexplore.databinding.ActivityDetailBinding
@@ -29,7 +29,6 @@ import java.util.Locale
 class DetailActivity : ScopeActivity(), BaseView<DetailState> {
     private var catalogId = 0
     private var catalogTypeId: Int = 1
-    private var isFromFavorite = false
     private lateinit var binding: ActivityDetailBinding
     private lateinit var seasonAdapter: SeasonAdapter
     private lateinit var productionCompanyAdapter: ProductionCompanyAdapter
@@ -40,9 +39,8 @@ class DetailActivity : ScopeActivity(), BaseView<DetailState> {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        catalogId = intent.getIntExtra("catalog_id", 0)
-        catalogTypeId = intent.getIntExtra("catalog_type_id", 1)
-        isFromFavorite = intent.getBooleanExtra("is_from_favorite", false)
+        catalogId = intent.getIntExtra(IntentConstants.CATALOG_ID, 0)
+        catalogTypeId = intent.getIntExtra(IntentConstants.CATALOG_TYPE_ID, 1)
 
         setFavoriteStatus()
         setToolbar()
@@ -122,44 +120,49 @@ class DetailActivity : ScopeActivity(), BaseView<DetailState> {
             }
 
             else -> {
-                binding.progressLayout.visibility = GONE
-                binding.nestedScrollView.visibility = VISIBLE
+                binding.apply {
+                    progressLayout.visibility = GONE
+                    nestedScrollView.visibility = VISIBLE
+                    labelProductionCompany.visibility = GONE
+
+                    val favoriteIcon =
+                        if (state.isFavorite == true) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24
+                    iButtonFavorite.setBackgroundResource(favoriteIcon)
+                }
+
                 state.catalogDetail?.data.let { catalogDetail ->
-                    binding.toolbar.textTitleBar.text = catalogDetail?.title ?: ""
-                    binding.textTitle.text = catalogDetail?.title ?: ""
-                    binding.textOverview.text = catalogDetail?.overview ?: ""
-                    binding.textGenre.text = catalogDetail?.genres ?: ""
-                    binding.textReleaseDate.text = catalogDetail?.releaseDate?.let {
-                        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                        val outputFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+                    binding.apply {
+                        toolbar.textTitleBar.text = catalogDetail?.title ?: ""
+                        textTitle.text = catalogDetail?.title ?: ""
+                        textOverview.text = catalogDetail?.overview ?: ""
+                        textGenre.text = catalogDetail?.genres ?: ""
+                        textReleaseDate.text = catalogDetail?.releaseDate?.let {
+                            val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                            val outputFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
 
-                        outputFormat.format(inputFormat.parse(it)!!)
-                    } ?: ""
-                    binding.ratingBar.rating =
-                        (String.format(
-                            Locale.US,
-                            "%.1f",
-                            catalogDetail?.voteAverage?.toFloat() ?: 0f
-                        )
-                            .toFloat() / 10) * 5
-                    binding.textRating.text =
-                        String.format(
-                            Locale.US,
-                            "%.1f",
-                            catalogDetail?.voteAverage?.toFloat() ?: 0f
-                        )
-
-
-                    Glide.with(applicationContext)
-                        .load("https://image.tmdb.org/t/p/w500${catalogDetail?.backdropPath}")
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .placeholder(
+                            outputFormat.format(inputFormat.parse(it)!!)
+                        } ?: ""
+                        ratingBar.rating =
+                            (String.format(
+                                Locale.US,
+                                "%.1f",
+                                catalogDetail?.voteAverage?.toFloat() ?: 0f
+                            )
+                                .toFloat() / 10) * 5
+                        textRating.text =
+                            String.format(
+                                Locale.US,
+                                "%.1f",
+                                catalogDetail?.voteAverage?.toFloat() ?: 0f
+                            )
+                        imageDetail.loadImage(
+                            "https://image.tmdb.org/t/p/w500${catalogDetail?.backdropPath}",
                             ContextCompat.getDrawable(
-                                this@DetailActivity,
+                                applicationContext,
                                 R.drawable.baseline_local_movies_24
                             )
                         )
-                        .into(binding.imageDetail)
+                    }
 
                     catalogDetail?.seasons?.takeIf { it.isNotEmpty() }?.let {
                         binding.apply {
@@ -169,7 +172,6 @@ class DetailActivity : ScopeActivity(), BaseView<DetailState> {
                         seasonAdapter.setData(it)
                     }
 
-                    binding.labelProductionCompany.visibility = GONE
                     catalogDetail?.productionCompanies?.takeIf { it.isNotEmpty() }?.let {
                         binding.apply {
                             labelProductionCompany.visibility = VISIBLE
@@ -177,12 +179,6 @@ class DetailActivity : ScopeActivity(), BaseView<DetailState> {
                         }
                         productionCompanyAdapter.setData(it)
                     }
-                }
-
-                if (state.isFavorite == true) {
-                    binding.iButtonFavorite.setBackgroundResource(R.drawable.baseline_favorite_24)
-                } else {
-                    binding.iButtonFavorite.setBackgroundResource(R.drawable.baseline_favorite_border_24)
                 }
             }
         }

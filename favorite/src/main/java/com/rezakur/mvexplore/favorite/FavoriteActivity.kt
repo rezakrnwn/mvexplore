@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rezakur.core.base.BaseView
+import com.rezakur.core.constant.IntentConstants
 import com.rezakur.core.di.databaseModule
 import com.rezakur.core.di.networkModule
 import com.rezakur.core.di.repositoryModule
@@ -64,8 +65,8 @@ class FavoriteActivity : AppCompatActivity(), BaseView<FavoriteState> {
 
         favoriteAdapter.setOnItemClickListener { favorite ->
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("catalog_id", favorite.id)
-            intent.putExtra("catalog_type_id", favorite.type.id)
+            intent.putExtra(IntentConstants.CATALOG_ID, favorite.id)
+            intent.putExtra(IntentConstants.CATALOG_TYPE_ID, favorite.type.id)
             startActivity(intent)
         }
     }

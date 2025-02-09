@@ -1,7 +1,6 @@
 package com.rezakur.core.data.sources.remote.response
 
 import com.google.gson.annotations.SerializedName
-import com.rezakur.core.domain.models.CatalogDetail
 
 data class MovieDetailResponse(
     @SerializedName("adult")

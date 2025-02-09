@@ -10,11 +10,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.rezakur.core.BuildConfig
 import com.rezakur.core.base.BaseView
 import com.rezakur.core.constant.CatalogType
+import com.rezakur.core.constant.IntentConstants
 import com.rezakur.core.domain.models.Catalog
 import com.rezakur.core.ui.CatalogAdapter
-import com.rezakur.mvexplore.BuildConfig
 import com.rezakur.mvexplore.databinding.FragmentTvShowBinding
 import com.rezakur.mvexplore.presentation.detail.DetailActivity
 import com.rezakur.mvexplore.presentation.tvshow.viewmodels.TvShowIntent
@@ -67,8 +68,8 @@ class TvShowFragment : ScopeFragment(), BaseView<TvShowState> {
 
         catalogAdapter.setOnItemClickListener { catalog: Catalog ->
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("catalog_id", catalog.id)
-            intent.putExtra("catalog_type_id", CatalogType.TV_SHOW.id)
+            intent.putExtra(IntentConstants.CATALOG_ID, catalog.id)
+            intent.putExtra(IntentConstants.CATALOG_TYPE_ID, CatalogType.TV_SHOW.id)
             startActivity(intent)
         }
 

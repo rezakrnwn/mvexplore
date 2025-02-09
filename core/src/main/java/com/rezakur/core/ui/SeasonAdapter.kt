@@ -1,26 +1,35 @@
 package com.rezakur.core.ui
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.rezakur.core.R
+import com.rezakur.core.base.BaseDiffCallback
 import com.rezakur.core.databinding.ItemSeasonBinding
 import com.rezakur.core.domain.models.Season
+import com.rezakur.core.extensions.loadImage
 
 class SeasonAdapter : RecyclerView.Adapter<SeasonAdapter.MainViewHolder>() {
     private var seasonList = ArrayList<Season>()
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<Season>?) {
         if (newList == null) return
+        val diffCallback = BaseDiffCallback(
+            oldList = seasonList,
+            newList = newList,
+            areItemsSame = { old, new -> old.id == new.id },
+            areContentsSame = { old, new -> old == new }
+        )
+
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         seasonList.clear()
         seasonList.addAll(newList)
-        notifyDataSetChanged()
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder =
@@ -41,17 +50,13 @@ class SeasonAdapter : RecyclerView.Adapter<SeasonAdapter.MainViewHolder>() {
         fun bind(season: Season) {
             with(binding) {
                 textTitle.text = season.title
-
-                Glide.with(itemView.context)
-                    .load("https://image.tmdb.org/t/p/w500${season.posterPath}")
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .error(
-                        ContextCompat.getDrawable(
-                            itemView.context,
-                            R.drawable.baseline_local_movies_24
-                        )
+                imageView.loadImage(
+                    "https://image.tmdb.org/t/p/w500${season.posterPath}",
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.baseline_local_movies_24
                     )
-                    .into(imageView)
+                )
             }
         }
     }
