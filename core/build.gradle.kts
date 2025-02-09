@@ -1,7 +1,15 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.devtools.ksp")
+}
+
+val localProperties = Properties()
+
+file("../local.properties").takeIf { it.exists() }?.inputStream()?.use {
+    localProperties.load(it)
 }
 
 android {
@@ -16,8 +24,14 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "PASS_PHRASE", "\"${localProperties.getProperty("passPhrase", "")}\"")
+            buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("apiKey", "")}\"")
+        }
         release {
-            isMinifyEnabled = false
+            buildConfigField("String", "PASS_PHRASE", "\"${localProperties.getProperty("passPhrase", "")}\"")
+            buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("apiKey", "")}\"")
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -33,6 +47,9 @@ android {
     }
     viewBinding {
         enable = true
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
@@ -63,6 +80,10 @@ dependencies {
     // Dependency Injection
     api(libs.koin.core)
     api(libs.koin.android)
+
+    // Security
+    implementation(libs.android.database.sqlcipher)
+    implementation(libs.androidx.sqlite.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

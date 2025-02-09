@@ -6,12 +6,6 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
-val localProperties = Properties()
-
-file("../local.properties").takeIf { it.exists() }?.inputStream()?.use {
-    localProperties.load(it)
-}
-
 android {
     namespace = "com.rezakur.mvexplore"
     compileSdk = 35
@@ -27,17 +21,12 @@ android {
     }
 
     buildFeatures {
-        buildConfig = true
         viewBinding = true
     }
 
     buildTypes {
-        debug {
-            buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("apiKey", "")}\"")
-        }
         release {
-            isMinifyEnabled = false
-            buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("apiKey", "")}\"")
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -53,10 +42,6 @@ android {
     }
     viewBinding {
         enable = true
-    }
-    buildFeatures {
-        viewBinding = true
-        buildConfig = true
     }
     dynamicFeatures += setOf(":favorite")
 }
