@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="catalog_poster_content_desc">This is movie or tv show poster</string>
+    <string name="product_company_image_desc">This is product company image</string>
+    <string name="season_poster_image_desc">This is season poster image</string>
+</resources>

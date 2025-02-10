@@ -1,9 +1,8 @@
 package com.rezakur.core.data.sources.remote
 
-import com.rezakur.core.network.ApiResponse
-import com.rezakur.core.data.sources.remote.response.MetaResponse
 import com.rezakur.core.data.sources.remote.response.MovieDetailResponse
 import com.rezakur.core.data.sources.remote.response.MovieResponse
+import com.rezakur.core.network.ApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

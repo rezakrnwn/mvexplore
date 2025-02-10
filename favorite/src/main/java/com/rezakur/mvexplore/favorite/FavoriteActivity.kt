@@ -9,19 +9,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rezakur.core.base.BaseView
 import com.rezakur.core.constant.IntentConstants
-import com.rezakur.core.di.databaseModule
-import com.rezakur.core.di.networkModule
-import com.rezakur.core.di.repositoryModule
-import com.rezakur.core.di.useCaseModule
 import com.rezakur.core.ui.FavoriteAdapter
 import com.rezakur.mvexplore.R
 import com.rezakur.mvexplore.favorite.databinding.ActivityFavoriteBinding
 import com.rezakur.mvexplore.favorite.di.viewModelModule
-import com.rezakur.mvexplore.presentation.detail.DetailActivity
 import com.rezakur.mvexplore.favorite.viewmodels.FavoriteIntent
 import com.rezakur.mvexplore.favorite.viewmodels.FavoriteState
 import com.rezakur.mvexplore.favorite.viewmodels.FavoriteStatus
 import com.rezakur.mvexplore.favorite.viewmodels.FavoriteViewModel
+import com.rezakur.mvexplore.presentation.detail.DetailActivity
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -46,7 +42,10 @@ class FavoriteActivity : AppCompatActivity(), BaseView<FavoriteState> {
     private fun setToolbar() {
         setSupportActionBar(binding.toolbar.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.toolbar.toolbar.apply {
+            setBackgroundColor(getColor(R.color.colorPrimary))
+            setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        }
         binding.toolbar.textTitleBar.text = getString(R.string.favorite)
     }
 

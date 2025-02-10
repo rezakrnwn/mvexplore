@@ -132,6 +132,7 @@ class DetailActivity : ScopeActivity(), BaseView<DetailState> {
 
                 state.catalogDetail?.data.let { catalogDetail ->
                     binding.apply {
+                        toolbar.toolbar.setBackgroundColor(getColor(R.color.colorPrimary))
                         toolbar.textTitleBar.text = catalogDetail?.title ?: ""
                         textTitle.text = catalogDetail?.title ?: ""
                         textOverview.text = catalogDetail?.overview ?: ""

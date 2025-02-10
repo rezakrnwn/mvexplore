@@ -44,7 +44,7 @@ data class TvShowsResponse(
     val voteCount: Int? = null
 ) {
      object Mapper {
-         fun toCatalogDomain(response: TvShowsResponse) = com.rezakur.core.domain.models.Catalog(
+         fun toCatalogDomain(response: TvShowsResponse) = Catalog(
              id = response.id,
              title = response.name ?: "",
              overview = response.overview ?: "",

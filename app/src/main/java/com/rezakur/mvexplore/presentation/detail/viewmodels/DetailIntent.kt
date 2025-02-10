@@ -7,5 +7,5 @@ sealed class DetailIntent : BaseViewIntent {
     data class LoadMovieDetail(val apiKey: String, val id: Int) : DetailIntent()
     data class LoadTvShowDetail(val apiKey: String, val id: Int) : DetailIntent()
     data class AddFavorite(val catalogTypeId: Int) : DetailIntent()
-    object RemoveFavorite : DetailIntent()
+    data object RemoveFavorite : DetailIntent()
 }

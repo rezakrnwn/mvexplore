@@ -72,8 +72,8 @@ data class TvShowDetailResponse(
     val voteCount: Int?
 ) {
     object Mapper {
-        fun toCatalogDetailDomain(response: TvShowDetailResponse): com.rezakur.core.domain.models.CatalogDetail =
-            com.rezakur.core.domain.models.CatalogDetail(
+        fun toCatalogDetailDomain(response: TvShowDetailResponse): CatalogDetail =
+            CatalogDetail(
                 id = response.id ?: 0,
                 title = response.name ?: "",
                 overview = response.overview ?: "",
@@ -83,7 +83,7 @@ data class TvShowDetailResponse(
                 backdropPath = response.backdropPath ?: "",
                 genres = response.genres?.joinToString { it?.name ?: "" } ?: "",
                 seasons = response.seasons?.map { season ->
-                    com.rezakur.core.domain.models.Season(
+                    Season(
                         id = season?.id ?: 0,
                         title = season?.name ?: "",
                         posterPath = season?.posterPath ?: "",
@@ -91,7 +91,7 @@ data class TvShowDetailResponse(
                     )
                 } ?: emptyList(),
                 productionCompanies = response.productionCompanies?.map { productionCompany ->
-                    com.rezakur.core.domain.models.ProductionCompany(
+                    ProductionCompany(
                         id = productionCompany.id ?: 0,
                         name = productionCompany.name ?: "",
                         posterPath = productionCompany.logoPath ?: "",

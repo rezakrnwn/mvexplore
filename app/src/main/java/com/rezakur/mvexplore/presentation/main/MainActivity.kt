@@ -42,18 +42,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        binding.toolbar.let {
-            it.textTitleBar.text = getString(R.string.home_page_title)
-            it.toolbar.inflateMenu(R.menu.toolbar_menu)
-            it.toolbar.setOnMenuItemClickListener { menu ->
-                when (menu.itemId) {
-                    R.id.action_favorite -> {
-                        val uri = Uri.parse("mvexplore://favorite")
-                        startActivity(Intent(Intent.ACTION_VIEW, uri))
-                        return@setOnMenuItemClickListener true
-                    }
-                    else -> {
-                        return@setOnMenuItemClickListener false
+        binding.toolbar.apply {
+            textTitleBar.text = getString(R.string.home_page_title)
+            toolbar.apply {
+                inflateMenu(R.menu.toolbar_menu)
+                setBackgroundColor(getColor(R.color.colorPrimary))
+                setOnMenuItemClickListener { menu ->
+                    when (menu.itemId) {
+                        R.id.action_favorite -> {
+                            val uri = Uri.parse("mvexplore://favorite")
+                            startActivity(Intent(Intent.ACTION_VIEW, uri))
+                            return@setOnMenuItemClickListener true
+                        }
+                        else -> {
+                            return@setOnMenuItemClickListener false
+                        }
                     }
                 }
             }

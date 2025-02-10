@@ -21,6 +21,7 @@
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/product_company_image_desc"
             android:scaleType="fitCenter"
             tools:srcCompat="@tools:sample/avatars" />
 
