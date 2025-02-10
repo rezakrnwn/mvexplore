@@ -21,22 +21,22 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        buildConfigField("String", "PASS_PHRASE", "\"${localProperties.getProperty("passPhrase", "")}\"")
+        buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("apiKey", "")}\"")
+        buildConfigField("String", "CERTIFICATE_PIN_1", "\"${localProperties.getProperty("certificatePin1", "")}\"")
+        buildConfigField("String", "CERTIFICATE_PIN_2", "\"${localProperties.getProperty("certificatePin2", "")}\"")
+        buildConfigField("String", "CERTIFICATE_PIN_3", "\"${localProperties.getProperty("certificatePin3", "")}\"")
     }
 
     buildTypes {
         debug {
-            buildConfigField("String", "PASS_PHRASE", "\"${localProperties.getProperty("passPhrase", "")}\"")
-            buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("apiKey", "")}\"")
-            buildConfigField("String", "CERTIFICATE_PIN_1", "\"${localProperties.getProperty("certificatePin1", "")}\"")
-            buildConfigField("String", "CERTIFICATE_PIN_2", "\"${localProperties.getProperty("certificatePin2", "")}\"")
-            buildConfigField("String", "CERTIFICATE_PIN_3", "\"${localProperties.getProperty("certificatePin3", "")}\"")
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
         release {
-            buildConfigField("String", "PASS_PHRASE", "\"${localProperties.getProperty("passPhrase", "")}\"")
-            buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("apiKey", "")}\"")
-            buildConfigField("String", "CERTIFICATE_PIN_1", "\"${localProperties.getProperty("certificatePin1", "")}\"")
-            buildConfigField("String", "CERTIFICATE_PIN_2", "\"${localProperties.getProperty("certificatePin2", "")}\"")
-            buildConfigField("String", "CERTIFICATE_PIN_3", "\"${localProperties.getProperty("certificatePin3", "")}\"")
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
